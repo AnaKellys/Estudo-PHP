@@ -2,9 +2,13 @@
 
 // incluir e executar um arquivo PHP. Garante que o arquivo seja incluído apenas uma vez.
 require_once 'source/Conta.php';
+require_once 'source/Titular.php';
+require_once 'source/CPF.php';
 
-$primeiraConta = new Conta(cpfTitular: '123.456.789.10', nomeTitular: "Vini Alves");
-var_dump($primeiraConta);
+
+
+$vini = new Conta(new Titular(new CPF('123.456.789.10'), nome: "Vini Alves"));
+var_dump($vini);
 $primeiraConta->depositar(500);
 $primeiraConta->sacar(100);  // -> acessar  
 
@@ -12,10 +16,10 @@ print $primeiraConta->recuperarNomeTitular() . PHP_EOL;
 print $primeiraConta->recuperarCpfTitular() . PHP_EOL;
 print $primeiraConta->recuperarSaldo() . PHP_EOL;
 
-$segundaConta = new Conta(cpfTitular: "698.549.548-10", nomeTitular: "Patricia");
-var_dump($segundaConta);
+$Patricia = new Conta(new Titular(new CPF("698.549.548-10"), nome:"Patricia"));
+var_dump($Patricia);
 
-$outra = new Conta(cpfTitular: "698.", nomeTitular: "rerere");
+$outra = new Conta(new Titular(new CPF("698."), nome: "rerere"));
 unset($segundaConta);
 
 // como o atributo está privado não consigo acessar desta forma.

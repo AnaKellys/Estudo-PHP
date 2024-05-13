@@ -1,5 +1,7 @@
 <?php
 
+require_once 'source/Titular.php';
+
 /* nesse arquivo tem uma "forma". Que é a class, serve para moldar o objeto,
   faz com que ele percorra só o que foi pedido. */
 
@@ -10,8 +12,7 @@ class Conta
   // atributo é uma característica ou propriedade de um objeto. Por exemplo, se você tem uma classe Carro,
   //  seus atributos poderiam incluir coisas como cor, modelo, ano de fabricação, etc. 
   // atributo de cada conta que será criada.
-  private string $cpfTitular;
-  private string $nomeTitular;
+  private Titular $titular;
   private float $saldo;
   // static / Um atributo estático, em linguagens de programação orientadas a objetos, é um tipo especial de atributo que pertence à classe em si, 
   // em vez de pertencer a instâncias individuais dessa classe. 
@@ -21,12 +22,10 @@ class Conta
   // A recomendação é ter apenas propriedades privadas e métodos públicos
 
   //  um método. quando uma nova conta for feita isso será executado estado incon. / recebe parametros
-  public function __construct(string $cpfTitular, string $nomeTitular)
+  public function __construct(Titular $titular)
   {
     // $this acessa a instância.
-    $this->cpfTitular = $cpfTitular;
-    $this->validaNomeTitular($nomeTitular);
-    $this->nomeTitular = $nomeTitular;
+    $this->titular = $titular;
     $this->saldo = 0;
 
     // self chama a class atual
@@ -38,6 +37,8 @@ class Conta
   {
     self::$numeroDeContas--;
   }
+  // verifica e limpar o lixo da memória
+
 
   // isso é um método, pois método é uma função que se localiza dentro de uma class
   public function sacar(float $valorASacar): void
@@ -75,41 +76,20 @@ class Conta
     return $this->saldo;
   }
 
-  // public function defineNomeTitular(string $nome): void
-  // {
-  //   $this->nomeTitular = $nome;
-  // }
-
-  public function recuperarNomeTitular(): string
+  public function recuperaNomeTitular(): string
   {
-    return $this->nomeTitular;
+    return $this->titular->recuperaNome();
   }
 
-  // public function defineCpfTitular(string $cpf): void
-  // {
-  //   $this->cpfTitular = $cpf;
-  // }
-
-  public function recuperarCpfTitular(): string
+  public function recuperaCpfTitular(): string
   {
-    return $this->cpfTitular;
-  }
-
-  private function validaNomeTitular(string $nomeTitular)
-  {
-    // "strlen()" percorre a string e informa a quantidade de caracteres.
-    if (strlen($nomeTitular) < 5) {
-      print "Nome precisa ter no mínimo 5 caracteres";
-      exit();
-    }
+    return $this->titular->recuperaCpf();
   }
 
   public static function recuperarNumeroDeContas(): int
   {
     return self::$numeroDeContas;
   }
-
-  // verifica e limpar o lixo da memória
 
 }
 
