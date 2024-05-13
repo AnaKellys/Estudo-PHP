@@ -7,16 +7,36 @@
 
 class Conta
 {
+  // atributo é uma característica ou propriedade de um objeto. Por exemplo, se você tem uma classe Carro,
+  //  seus atributos poderiam incluir coisas como cor, modelo, ano de fabricação, etc. 
+  // atributo de cada conta que será criada.
   private string $cpfTitular;
   private string $nomeTitular;
-  private float $saldo = 0;
+  private float $saldo;
+  // static / Um atributo estático, em linguagens de programação orientadas a objetos, é um tipo especial de atributo que pertence à classe em si, 
+  // em vez de pertencer a instâncias individuais dessa classe. 
+  // atributo de uma class. 
+  private static $numeroDeContas = 0;
+
   // A recomendação é ter apenas propriedades privadas e métodos públicos
 
+  //  um método. quando uma nova conta for feita isso será executado estado incon. / recebe parametros
   public function __construct(string $cpfTitular, string $nomeTitular)
   {
+    // $this acessa a instância.
     $this->cpfTitular = $cpfTitular;
-    $this->$nomeTitular = $nomeTitular;
+    $this->validaNomeTitular($nomeTitular);
+    $this->nomeTitular = $nomeTitular;
     $this->saldo = 0;
+
+    // self chama a class atual
+    self::$numeroDeContas++;
+  }
+
+  // quando uma instancia deixa de existir na memória, quando é apagada, coletor de lixo
+  public function __destruct()
+  {
+    self::$numeroDeContas--;
   }
 
   // isso é um método, pois método é uma função que se localiza dentro de uma class
@@ -74,6 +94,23 @@ class Conta
   {
     return $this->cpfTitular;
   }
+
+  private function validaNomeTitular(string $nomeTitular)
+  {
+    // "strlen()" percorre a string e informa a quantidade de caracteres.
+    if (strlen($nomeTitular) < 5) {
+      print "Nome precisa ter no mínimo 5 caracteres";
+      exit();
+    }
+  }
+
+  public static function recuperarNumeroDeContas(): int
+  {
+    return self::$numeroDeContas;
+  }
+
+  // verifica e limpar o lixo da memória
+
 }
 
 
