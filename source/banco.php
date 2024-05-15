@@ -1,26 +1,36 @@
 <?php
 
 // incluir e executar um arquivo PHP. Garante que o arquivo seja incluído apenas uma vez.
-require_once 'source/Conta.php';
-require_once 'source/Titular.php';
-require_once 'source/CPF.php';
+// require_once 'source/Modelo/Conta/Conta.php';
+// require_once 'source/Modelo/Endereco.php';
+require_once 'source/Modelo/Pessoa.php';
+// require_once 'source/Modelo/Conta/Titular.php';
+// require_once 'source/Modelo/CPF.php';
+
+use Banco\Modelo\Conta\Titular;
+use Banco\Modelo\Endereco;
+use Banco\Modelo\CPF;
+use Banco\Modelo\Conta\Conta;
 
 
-
-$vini = new Conta(new Titular(new CPF('123.456.789.10'), nome: "Vini Alves"));
+$endereco = new Endereco(cidade: 'Acreúna', bairro: 'Aquele', rua: 'minha rua', numero: '128');
+$vini = new Titular(new CPF('123.456.789.10'), nome: "Vini Alves", endereco: $endereco);
 var_dump($vini);
+$primeiraConta = new Conta($vini);
 $primeiraConta->depositar(500);
 $primeiraConta->sacar(100);  // -> acessar  
 
-print $primeiraConta->recuperarNomeTitular() . PHP_EOL;
-print $primeiraConta->recuperarCpfTitular() . PHP_EOL;
+print $primeiraConta->$Conta::recuperarNomeTitular() . PHP_EOL; //obs.
+print $primeiraConta->$Conta::recuperarCpfTitular() . PHP_EOL; //obs.
 print $primeiraConta->recuperarSaldo() . PHP_EOL;
 
-$Patricia = new Conta(new Titular(new CPF("698.549.548-10"), nome:"Patricia"));
-var_dump($Patricia);
+$patricia = new Titular(new CPF("698.549.548-10"), nome: "Patricia", endereco: $endereco);
+$segundaConta = new Conta($patricia);
+var_dump($patricia);
 
-$outra = new Conta(new Titular(new CPF("698."), nome: "rerere"));
-unset($segundaConta);
+$outroEndereco = new Endereco(cidade: 'A', bairro: 'B', rua: 'C', numero: '1D');
+$outra = new Conta(new Titular(new CPF("698.156"), nome: "rerere", endereco: $outroEndereco));
+// unset($segundaConta);
 
 // como o atributo está privado não consigo acessar desta forma.
 // print Conta::$numeroDeContas;

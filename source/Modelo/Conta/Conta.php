@@ -1,6 +1,6 @@
 <?php
 
-require_once 'source/Titular.php';
+namespace Banco\Modelo\Conta;
 
 /* nesse arquivo tem uma "forma". Que é a class, serve para moldar o objeto,
   faz com que ele percorra só o que foi pedido. */
