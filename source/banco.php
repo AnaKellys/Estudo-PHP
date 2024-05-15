@@ -2,10 +2,19 @@
 
 // incluir e executar um arquivo PHP. Garante que o arquivo seja incluído apenas uma vez.
 // require_once 'source/Modelo/Conta/Conta.php';
-// require_once 'source/Modelo/Endereco.php';
-require_once 'source/Modelo/Pessoa.php';
-// require_once 'source/Modelo/Conta/Titular.php';
-// require_once 'source/Modelo/CPF.php';
+
+spl_autoload_register(function (string $nomeClass) {
+  // source\Modelo\Endereco.php;
+  $caminhoArquivo = str_replace('Banco', 'source', $nomeClass);
+  // $caminhoArquivo = str_replace(search:'\\', replace:DIRECTORY_SEPARATOR, $caminhoArquivo);
+  $caminhoArquivo = str_replace('\\', DIRECTORY_SEPARATOR, $caminhoArquivo);
+  $caminhoArquivo = '.php';
+
+  if (file_exists($caminhoArquivo)) {
+    require_once $caminhoArquivo;
+  }
+});
+
 
 use Banco\Modelo\Conta\Titular;
 use Banco\Modelo\Endereco;
@@ -20,8 +29,8 @@ $primeiraConta = new Conta($vini);
 $primeiraConta->depositar(500);
 $primeiraConta->sacar(100);  // -> acessar  
 
-print $primeiraConta->$Conta::recuperarNomeTitular() . PHP_EOL; //obs.
-print $primeiraConta->$Conta::recuperarCpfTitular() . PHP_EOL; //obs.
+print $primeiraConta->recuperaNomeTitular() . PHP_EOL; //obs.
+print $primeiraConta->recuperaCpfTitular() . PHP_EOL; //obs.
 print $primeiraConta->recuperarSaldo() . PHP_EOL;
 
 $patricia = new Titular(new CPF("698.549.548-10"), nome: "Patricia", endereco: $endereco);
