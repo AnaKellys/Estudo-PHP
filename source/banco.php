@@ -3,19 +3,6 @@
 // incluir e executar um arquivo PHP. Garante que o arquivo seja incluído apenas uma vez.
 // require_once 'source/Modelo/Conta/Conta.php';
 
-spl_autoload_register(function (string $nomeClass) {
-  // source\Modelo\Endereco.php;
-  $caminhoArquivo = str_replace('Banco', 'source', $nomeClass);
-  // $caminhoArquivo = str_replace(search:'\\', replace:DIRECTORY_SEPARATOR, $caminhoArquivo);
-  $caminhoArquivo = str_replace('\\', DIRECTORY_SEPARATOR, $caminhoArquivo);
-  $caminhoArquivo = '.php';
-
-  if (file_exists($caminhoArquivo)) {
-    require_once $caminhoArquivo;
-  }
-});
-
-
 use Banco\Modelo\Conta\Titular;
 use Banco\Modelo\Endereco;
 use Banco\Modelo\CPF;
