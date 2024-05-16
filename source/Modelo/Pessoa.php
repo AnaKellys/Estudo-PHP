@@ -3,7 +3,7 @@
 namespace Banco\Modelo;
 class Pessoa
 {
-  // protected nele pode ser alterado pela sua pripria class e pelas class filhas. onde estiver o extend
+  // protected nele pode ser alterado pela sua pripria class e pelas class filhas. onde estiver o extends
   protected string $nome;
   private CPF $cpf;
 

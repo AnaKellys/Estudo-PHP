@@ -5,6 +5,11 @@ class CPF
 {
   private $numero;
 
+  public function __construct($numero)
+  {
+    $this->numero = $numero;
+  }
+
   public function recuperaNumero(): string
   {
     return $this->numero;
@@ -24,5 +29,4 @@ class CPF
   //     $this->numero = $numero;
   //   // fazer de uma forma diferente depois "< 12"
   // }
-
 }

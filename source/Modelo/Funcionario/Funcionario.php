@@ -1,11 +1,13 @@
 <?php
 
-namespace Banco\Modelo;
+namespace Banco\Modelo\Funcionario;
+use Banco\Modelo\{Pessoa, CPF};
 
 // Funcionario é uma Pessoa
 class Funcionario extends Pessoa
 {
   private string $cargo;
+  private $salario;
 
   public function __construct(string $nome, CPF $cpf, string $cargo, float $salario)
   {
@@ -33,6 +35,11 @@ class Funcionario extends Pessoa
 
   public function calculaBonificacao(): float
   {
+    if ($this->cargo === 'Gerente') {
+      return $this->salario;
+    }
     return $this->salario * 0.1;
   }
+
+
 }
