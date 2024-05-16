@@ -3,11 +3,12 @@
 // incluir e executar um arquivo PHP. Garante que o arquivo seja incluído apenas uma vez.
 // require_once 'source/Modelo/Conta/Conta.php';
 
+require_once 'autoload.php';
+
 use Banco\Modelo\Conta\Titular;
 use Banco\Modelo\Endereco;
 use Banco\Modelo\CPF;
 use Banco\Modelo\Conta\Conta;
-
 
 $endereco = new Endereco(cidade: 'Acreúna', bairro: 'Aquele', rua: 'minha rua', numero: '128');
 $vini = new Titular(new CPF('123.456.789.10'), nome: "Vini Alves", endereco: $endereco);
