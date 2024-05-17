@@ -4,21 +4,15 @@ namespace Banco\Modelo\Funcionario;
 use Banco\Modelo\{Pessoa, CPF};
 
 // Funcionario é uma Pessoa
-class Funcionario extends Pessoa
+abstract class Funcionario extends Pessoa
 {
-  private string $cargo;
+
   private $salario;
 
-  public function __construct(string $nome, CPF $cpf, string $cargo, float $salario)
+  public function __construct(string $nome, CPF $cpf, float $salario)
   {
     parent::__construct($nome, $cpf);
-    $this->cargo = $cargo;
     $this->salario = $salario;
-  }
-
-  public function recuperaCrago()
-  {
-    return $this->cargo;
   }
 
   // Método setter
@@ -28,18 +22,19 @@ class Funcionario extends Pessoa
     $this->nome = $nome;
   }
   
+  public function recebeAumento(float $valorAumento): void
+  {
+    if ($valorAumento < 0) {
+      print "Aumento deve ser positivo";
+      return;
+    }
+    $this->salario += $valorAumento;
+  }
+
   public function recuperaSalario(): float
   {
     return $this->salario;
   }
 
-  public function calculaBonificacao(): float
-  {
-    if ($this->cargo === 'Gerente') {
-      return $this->salario;
-    }
-    return $this->salario * 0.1;
-  }
-
-
+  abstract public function calculaBonificacao(): float;
 }

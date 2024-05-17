@@ -1,7 +1,7 @@
 <?php
 
 namespace Banco\Modelo;
-class Pessoa
+abstract class Pessoa
 {
   // protected nele pode ser alterado pela sua pripria class e pelas class filhas. onde estiver o extends
   protected string $nome;
