@@ -1,7 +1,7 @@
 <?php
 
 namespace Banco\Service;
-use Banco\Modelo\Funcionario\Diretor;
+use Banco\Modelo\Autenticavel;
 
 class Autenticador
 {
