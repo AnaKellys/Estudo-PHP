@@ -11,5 +11,3 @@ spl_autoload_register(function (string $nomeClasse) {
     require_once $caminhoArquivo;
   }
 });
-
-// .= o que é?

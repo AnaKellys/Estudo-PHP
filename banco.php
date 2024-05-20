@@ -10,7 +10,7 @@ use Banco\Modelo\Conta\{Conta, Titular};
 use Banco\Modelo\Conta\ContaCorrente;
 
 $endereco = new Endereco(cidade: 'Acreúna', bairro: 'Aquele', rua: 'minha rua', numero: '128');
-$vini = new Titular(new CPF('123.456.789.10'), nome: "Vini Alves", endereco: $endereco);
+$vini = new Titular(new CPF('123.456.789.10'), nome: "Vini Alves");
 var_dump($vini);
 $primeiraConta = new ContaCorrente($vini);
 $primeiraConta->depositar(500);
@@ -20,12 +20,12 @@ print $primeiraConta->recuperaNomeTitular() . PHP_EOL; //obs.
 print $primeiraConta->recuperaCpfTitular() . PHP_EOL; //obs.
 print $primeiraConta->recuperarSaldo() . PHP_EOL;
 
-$patricia = new Titular(new CPF("698.549.548-10"), nome: "Patricia", endereco: $endereco);
+$patricia = new Titular(new CPF("698.549.548-10"), nome: "Patricia");
 $segundaConta = new ContaCorrente($patricia);
 var_dump($patricia);
 
 $outroEndereco = new Endereco(cidade: 'A', bairro: 'B', rua: 'C', numero: '1D');
-$outra = new ContaCorrente(new Titular(new CPF("698.156"), nome: "rerere", endereco: $outroEndereco));
+$outra = new ContaCorrente(new Titular(new CPF("698.156"), nome: "rerere",));
 // unset($segundaConta);
 
 // como o atributo está privado não consigo acessar desta forma.

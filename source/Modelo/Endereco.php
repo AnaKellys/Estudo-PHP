@@ -42,5 +42,4 @@ final class Endereco
     return "{$this->rua}, {$this->numero}, {$this->bairro}, {$this->cidade}";
   }
 
-
 }
