@@ -1,8 +1,10 @@
 <?php
 
 namespace Banco\Modelo;
-class Endereco
+final class Endereco
 {
+  use AcessoPropriedade;
+
   private string $cidade;
   private string $bairro;
   private string $rua;
@@ -37,7 +39,8 @@ class Endereco
 
   public function __toString(): string
   {
-    return "$this->rua, $this->numero, $this->bairro, {$this->cidade}";
+    return "{$this->rua}, {$this->numero}, {$this->bairro}, {$this->cidade}";
   }
+
 
 }
