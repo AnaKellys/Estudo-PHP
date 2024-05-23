@@ -6,7 +6,7 @@ abstract class Conta
 {
   private Titular $titular;
   protected float $saldo;
-  private static $numeroDeContas = 0;
+  private static int $numeroDeContas = 0;
 
   public function __construct(Titular $titular)
   {
@@ -27,8 +27,7 @@ abstract class Conta
     $tarifaSaque =  $valorASacar * $this->percentualTarifa();
     $valorSaque = $valorASacar + $tarifaSaque;
     if ($valorSaque > $this->saldo) {
-      print "Saldo indisponível";
-      return;
+      throw new SaldoInsuficienteException($valorASacar, $this->saldo);
     }
     $this->saldo -= $valorSaque;
   }
@@ -45,8 +44,7 @@ abstract class Conta
   public function transferir(float $valorATransferir, Conta $contaDestino): void
   {
     if ($valorATransferir > $this->saldo) {
-      print "Saldo indisponível";
-      return;
+      throw new \InvalidArgumentException();
     }
     $this->sacar($valorATransferir);
     $contaDestino->depositar($valorATransferir);
